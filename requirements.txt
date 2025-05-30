@@ -1,0 +1,8 @@
+pyramid==2.0
+pyramid_jinja2==2.10
+pymysql==1.1.0
+SQLAlchemy==2.0.30
+transaction==3.0.1
+zope.sqlalchemy==3.0
+waitress==3.0.0
+plaster_pastedeploy==1.0.1

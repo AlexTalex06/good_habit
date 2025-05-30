@@ -1,0 +1,93 @@
+{% extends "layout.jinja2" %}
+{% block title %}Editar Hábito - Good Habit{% endblock %}
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <h2 class="mb-4">Editar Hábito</h2>
+
+    {% if errors %}
+      <div class="alert alert-danger">
+        <ul>
+          {% for error in errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <form method="POST" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre del hábito</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          required
+          minlength="2"
+          value="{{ name|default('') }}"
+        />
+        <div class="invalid-feedback">Por favor ingresa el nombre del hábito.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea
+          id="description"
+          name="description"
+          class="form-control"
+          rows="3"
+        >{{ description|default('') }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="difficulty" class="form-label">Grado de dificultad</label>
+        <select id="difficulty" name="difficulty" class="form-select" required>
+          <option value="" disabled {% if not difficulty %}selected{% endif %}>Selecciona una opción</option>
+          <option value="Bajo" {% if difficulty == 'Bajo' %}selected{% endif %}>Bajo</option>
+          <option value="Medio" {% if difficulty == 'Medio' %}selected{% endif %}>Medio</option>
+          <option value="Alto" {% if difficulty == 'Alto' %}selected{% endif %}>Alto</option>
+        </select>
+        <div class="invalid-feedback">Por favor selecciona el grado de dificultad.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="frequency" class="form-label">Frecuencia</label>
+        <select id="frequency" name="frequency" class="form-select" required>
+          <option value="" disabled {% if not frequency %}selected{% endif %}>Selecciona una opción</option>
+          <option value="Diario" {% if frequency == 'Diario' %}selected{% endif %}>Diario</option>
+          <option value="Semanal" {% if frequency == 'Semanal' %}selected{% endif %}>Semanal</option>
+          <option value="Mensual" {% if frequency == 'Mensual' %}selected{% endif %}>Mensual</option>
+          <option value="Otra" {% if frequency == 'Otra' %}selected{% endif %}>Otra</option>
+        </select>
+        <div class="invalid-feedback">Por favor selecciona una frecuencia válida.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary me-2">Guardar cambios</button>
+      <a href="{{ request.route_url('home') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+</div>
+
+<script>
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('form');
+    Array.from(forms).forEach(form => {
+      form.addEventListener(
+        'submit',
+        event => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        },
+        false
+      );
+    });
+  })();
+</script>
+
+{% endblock %}

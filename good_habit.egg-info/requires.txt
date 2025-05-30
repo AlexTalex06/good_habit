@@ -1,0 +1,5 @@
+pyramid
+pyramid_jinja2
+SQLAlchemy
+pymysql
+waitress

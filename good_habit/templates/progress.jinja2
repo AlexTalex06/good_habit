@@ -1,0 +1,36 @@
+
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<h2 class="mt-4">Progreso de Hábitos</h2>
+
+<a href="{{ request.route_url('home') }}" class="btn btn-secondary mb-3">← Volver al inicio</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Hábito</th>
+            <th>Progreso (últimos {{ max_days }} días)</th>
+            <th>Porcentaje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for habit, count in habit_progress.items() %}
+        <tr>
+            <td>{{ habit }}</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar"
+                         style="width: {{ (count / max_days * 100) | round(0, 'floor') }}%;" 
+                         aria-valuenow="{{ count }}" aria-valuemin="0" aria-valuemax="{{ max_days }}">
+                        {{ count }} / {{ max_days }}
+                    </div>
+                </div>
+            </td>
+            <td>{{ (count / max_days * 100) | round(0, 'floor') }}%</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

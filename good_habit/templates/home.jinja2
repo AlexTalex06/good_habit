@@ -1,0 +1,42 @@
+{% extends "layout.jinja2" %}
+
+{% block title %}Inicio - Good Habit{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Mis Hábitos</h2>
+
+<a href="{{ request.route_url('add_habit') }}" class="btn btn-primary mb-3">Añadir nuevo hábito</a>
+
+{% if habits %}
+    {% for habit in habits %}
+    <div class="card mb-3 animate_animated animate_fadeIn">
+        <div class="card-body">
+            <h5 class="card-title">{{ habit.name }}</h5>
+            <p class="card-text">{{ habit.description }}</p>
+            <p class="card-text">
+                <strong>Dificultad:</strong> {{ habit.difficulty }} |
+                <strong>Frecuencia:</strong> {{ habit.frequency }}
+            </p>
+            <p class="card-text">
+                <strong>Hoy:</strong>
+                {% if progress_today[habit.id] %}
+                    <span class="badge bg-success">Completado</span>
+                {% else %}
+                    <span class="badge bg-secondary">Pendiente</span>
+                {% endif %}
+            </p>
+            <a href="{{ request.route_url('complete_habit', id=habit.id) }}" class="btn btn-success btn-sm">Completar</a>
+            <a href="{{ request.route_url('edit_habit', id=habit.id) }}" class="btn btn-warning btn-sm">Editar</a>
+            <a href="{{ request.route_url('delete_habit', id=habit.id) }}" class="btn btn-danger btn-sm delete-btn">Eliminar</a>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="alert alert-info">
+        ¡Aún no tienes hábitos registrados! 🌱 <br>
+        Usa el botón "Añadir nuevo hábito" para comenzar.
+    </div>
+{% endif %}
+
+{% endblock %}

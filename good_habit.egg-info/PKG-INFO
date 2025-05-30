@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: good_habit
+Version: 0.1
+Requires-Dist: pyramid
+Requires-Dist: pyramid_jinja2
+Requires-Dist: SQLAlchemy
+Requires-Dist: pymysql
+Requires-Dist: waitress
+Dynamic: requires-dist

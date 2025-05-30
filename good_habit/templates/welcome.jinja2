@@ -1,0 +1,16 @@
+{% extends "layout.jinja2" %}
+{% block title %}Bienvenido - Good Habit{% endblock %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-4 text-center" style="max-width: 400px; width: 100%;">
+    <h1 class="mb-4">Bienvenido a Good Habit</h1>
+    <p class="mb-4 text-muted">Tu espacio para crear y mantener hábitos saludables.</p>
+    <a href="{{ request.route_url('login') }}" class="btn btn-success btn-lg me-3">
+      <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión
+    </a>
+    <a href="{{ request.route_url('register') }}" class="btn btn-outline-success btn-lg">
+      <i class="bi bi-person-plus"></i> Registrarse
+    </a>
+  </div>
+</div>
+{% endblock %}

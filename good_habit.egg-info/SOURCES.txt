@@ -1,0 +1,10 @@
+setup.py
+good_habit/__init__.py
+good_habit/models.py
+good_habit/views.py
+good_habit.egg-info/PKG-INFO
+good_habit.egg-info/SOURCES.txt
+good_habit.egg-info/dependency_links.txt
+good_habit.egg-info/entry_points.txt
+good_habit.egg-info/requires.txt
+good_habit.egg-info/top_level.txt

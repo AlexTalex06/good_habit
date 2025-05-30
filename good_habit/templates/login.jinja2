@@ -1,0 +1,77 @@
+{% extends "layout.jinja2" %}
+{% block title %}Iniciar sesión - Good Habit{% endblock %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+  <div class="col-md-5 col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-header bg-success text-white text-center">
+        <h4 class="mb-0"><i class="bi bi-box-arrow-in-right"></i> Inicia sesión</h4>
+      </div>
+      <div class="card-body">
+        {% if error %}
+          <div class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+        {% endif %}
+        <form method="post" novalidate>
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="usuario@ejemplo.com"
+              required
+              autofocus
+              aria-describedby="emailHelp"
+              autocomplete="email"
+            />
+            <div class="invalid-feedback">Por favor ingresa un correo válido.</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              required
+              minlength="6"
+              aria-describedby="passwordHelp"
+              autocomplete="current-password"
+            />
+            <div class="invalid-feedback">La contraseña es requerida y debe tener al menos 6 caracteres.</div>
+          </div>
+          <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-door-open"></i> Ingresar
+          </button>
+        </form>
+        <p class="mt-3 text-center">
+          ¿No tienes cuenta? <a href="{{ request.route_url('register') }}">Regístrate</a>
+        </p>
+      </div>
+    </div>
+    <p class="text-center mt-3">
+      <a href="{{ request.route_url('welcome') }}">Volver a bienvenida</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  // Validación de formulario con Bootstrap
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('form');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>
+{% endblock %}
